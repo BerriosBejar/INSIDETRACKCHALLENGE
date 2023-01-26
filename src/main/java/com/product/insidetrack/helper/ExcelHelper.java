@@ -19,8 +19,10 @@ import com.product.insidetrack.model.Product;
 
 public class ExcelHelper {
   public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-  static String[] HEADERs = { "Id", "Title", "Description", "Published" };
-  static String SHEET = "Products";
+  static String[] HEADERs = { "Purchase Date", "Invoice", "Customer Root", "Customer Leaf","Product Description"
+  ,"Pack Size","Unit Type","Category","Distributor Root","Distributor Leaf","Manufacturer","Quantity","Price","Total"};
+  static String SHEET = "Sheet1";
+  												  	  
 
   public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -90,11 +92,11 @@ public class ExcelHelper {
 
           switch (cellIdx) {
           case 0:
-            product.setPurchaseDate( currentCell.getStringCellValue());
+            product.setPurchaseDate( String.valueOf(currentCell.getNumericCellValue()) );
             break;
 
           case 1:
-             product.setInvoice(currentCell.getStringCellValue());
+             product.setInvoice(String.valueOf(currentCell.getNumericCellValue()));
             break;
 
           case 2:
@@ -111,7 +113,7 @@ public class ExcelHelper {
             product.setPackSize(currentCell.getStringCellValue());
             break;
           case 6:
-            product.setUntilType(currentCell.getStringCellValue());
+            product.setUnitType(currentCell.getStringCellValue());
             break;
           case 7:
             product.setCategory(currentCell.getStringCellValue());
@@ -120,15 +122,19 @@ public class ExcelHelper {
             product.setDistributorRoot(currentCell.getStringCellValue());
             break;
           case 9:
+            product.setDistributorLeaf(currentCell.getStringCellValue());
+            break;
+
+          case 10:
             product.setManafacturer(currentCell.getStringCellValue());
             break;
-          case 10:
+          case 11:
             product.setQuantity((int)currentCell.getNumericCellValue());
             break;
-          case 11:
-            product.setPrice(currentCell.getStringCellValue());
           case 12:
-            product.setTotal(currentCell.getStringCellValue());
+            product.setPrice(String.valueOf(currentCell.getNumericCellValue()) );
+          case 13:
+            product.setTotal(String.valueOf(currentCell.getNumericCellValue()) );
 
             break;
           default:

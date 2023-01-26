@@ -7,9 +7,10 @@ public class Product {
     private String customerLeaf;
     private String productDescription;
     private String packSize;
-    private String untilType;
+    private String unitType;
     private String category;
     private String distributorRoot;
+    private String distributorLeaf;
     private String manafacturer;
     private Integer quantity;
     private String price;
@@ -53,11 +54,11 @@ public class Product {
     public void setPackSize(String packSize) {
         this.packSize = packSize;
     }
-    public String getUntilType() {
-        return untilType;
+    public String getUnitType() {
+        return unitType;
     }
-    public void setUntilType(String untilType) {
-        this.untilType = untilType;
+    public void setUnitType(String unitType) {
+        this.unitType = unitType;
     }
     public String getCategory() {
         return category;
@@ -94,6 +95,12 @@ public class Product {
     }
     public void setTotal(String total) {
         this.total = total;
+    }
+    public String getDistributorLeaf() {
+        return distributorLeaf;
+    }
+    public void setDistributorLeaf(String distributorLeaf) {
+        this.distributorLeaf = distributorLeaf;
     }
 
 }

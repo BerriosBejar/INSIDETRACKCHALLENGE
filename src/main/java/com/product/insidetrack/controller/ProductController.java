@@ -21,7 +21,7 @@ public class ProductController {
     ProductService productService;
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllproducts() {
-      try {
+      // try {
         List<Product> products = productService.getAllProducts();
   
         if (products.isEmpty()) {
@@ -29,9 +29,9 @@ public class ProductController {
         }
   
         return new ResponseEntity<>(products, HttpStatus.OK);
-      } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-      }
+      // } catch (Exception e) {
+      //   return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      // }
     }
   
 }
