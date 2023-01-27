@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.product.insidetrack.model.Product;
 import com.product.insidetrack.service.ProductService;
-
-@CrossOrigin("http://localhost:8081")
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+@CrossOrigin("*")
 @Controller
 @RequestMapping("/api")
 public class ProductController {
+  private final static Logger logger = LoggerFactory.getLogger(ProductController.class);
     @Autowired
     ProductService productService;
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllproducts() {
-      // try {
+      try {
         List<Product> products = productService.getAllProducts();
   
         if (products.isEmpty()) {
@@ -29,9 +31,10 @@ public class ProductController {
         }
   
         return new ResponseEntity<>(products, HttpStatus.OK);
-      // } catch (Exception e) {
-      //   return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-      // }
+      } catch (Exception e) {
+        logger.error("Error "+e.getMessage());
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
     }
   
 }

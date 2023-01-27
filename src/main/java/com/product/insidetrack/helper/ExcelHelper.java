@@ -73,7 +73,9 @@ public class ExcelHelper {
       List<Product> Products = new ArrayList<Product>();
 
       int rowNumber = 0;
-      while (rows.hasNext()== true) {
+      
+      boolean nullCell=false;
+      while (rows.hasNext()== true && !nullCell) {
         Row currentRow = rows.next();
 
         // skip header
@@ -87,22 +89,22 @@ public class ExcelHelper {
         Product product = new Product();
 
         int cellIdx = 0;
-        while (cellsInRow.hasNext()==true) {
+        while (cellsInRow.hasNext()==true && !nullCell ) {
           Cell currentCell = cellsInRow.next();
-
+          // if(currentCell.getStringCellValue()==null){
+          //   nullCell=true;
+          // }
           switch (cellIdx) {
           case 0:
-            product.setPurchaseDate( String.valueOf(currentCell.getNumericCellValue()) );
+            product.setPurchaseDate( currentCell.getDateCellValue() );
             break;
 
           case 1:
              product.setInvoice(String.valueOf(currentCell.getNumericCellValue()));
             break;
-
           case 2:
             product.setCustomerRoot(currentCell.getStringCellValue());
             break;
-
           case 3:
             product.setCustomerLeaf(currentCell.getStringCellValue());
             break;
@@ -143,8 +145,12 @@ public class ExcelHelper {
 
           cellIdx++;
         }
+        if(product.getPurchaseDate()==null){
+            nullCell=true;
+        }else{
+          Products.add(product);
 
-        Products.add(product);
+        }
       }
 
       workbook.close();

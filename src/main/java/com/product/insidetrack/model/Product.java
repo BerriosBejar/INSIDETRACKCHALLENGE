@@ -1,7 +1,9 @@
 package com.product.insidetrack.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
 
 public class Product {
-    private String purchaseDate;
+    private Date purchaseDate;
     private String invoice;
     private String customerRoot;
     private String customerLeaf;
@@ -18,12 +20,7 @@ public class Product {
     
     public Product() {
     }
-    public String getPurchaseDate() {
-        return purchaseDate;
-    }
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
+   
     public String getInvoice() {
         return invoice;
     }
@@ -101,6 +98,14 @@ public class Product {
     }
     public void setDistributorLeaf(String distributorLeaf) {
         this.distributorLeaf = distributorLeaf;
+    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
 }
